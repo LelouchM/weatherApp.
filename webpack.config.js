@@ -5,11 +5,8 @@ const path = require('path');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/dev-server',
-        './src/index.js'
-    ],
+    context: __dirname + '/src',
+    entry: 'index.js',
     output: {
         publicPath: 'http://localhost:3000/',
         path: __dirname + '/public',
@@ -19,30 +16,26 @@ module.exports = {
     watchOptions: {
         aggregateTimeout: 100
     },
-    devtool: NODE_ENV == 'development' ? 'cheap-inline-module-source-map' : null,
+    devtool: NODE_ENV == 'development' ? 'cheap-inline-module-source-map' : false,
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('bundle.css'),
+        new ExtractTextPlugin('css/bundle.css'),
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
-        }),
-        new webpack.NoErrorsPlugin()
+        })
     ],
     resolve: {
-        modulesDirectories: ['node_modules', 'bower_components'],
-        moduleTemplates: ['*', 'index'],
-        extensions: ['', '.js'],
-        root: __dirname + '/src'
+        modules: [__dirname + '/src',
+         'node_modules'
+        ]
     },
     resolveLoader: {
-        modulesDirectories: ['node_modules', 'bower_components'],
-        moduleTemplates: ['*-loader', '*'],
-        extensions: ['', '.js']
+        moduleExtensions: ["-loader"]
     },
     devServer: {
         host: 'localhost',
         port: 3000,
-        contentBase: __dirname + '/public',
+        contentBase: path.join(__dirname, '/public'),
 
         inline: true,
         hot: true,
@@ -56,8 +49,7 @@ module.exports = {
                 loaders: ['react-hot', 'babel-loader'],
                 include: [
                     path.resolve(__dirname, 'src')
-                ],
-                plugins: ['transform-runtime']
+                ]
             },
             {
                 test: /\.(png|jpg|svg|gif)$/,
