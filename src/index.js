@@ -7,6 +7,8 @@ import thunk from 'redux-thunk';
 import reducer from './reducers/index';
 import App from './App';
 
+import './css/index.scss';
+
 const store = (NODE_ENV === 'development')
   ? createStore(reducer, require('redux-devtools-extension').composeWithDevTools(applyMiddleware(thunk)))
   : createStore(reducer, applyMiddleware(thunk));
