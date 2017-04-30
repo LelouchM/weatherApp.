@@ -105,20 +105,54 @@ body {
 
 #app {
   width: 85%;
+  height: 95vh;
 }
 
-.logo {
-  color: $asphalt;
-  font-size: 2em;
-  line-height: 10vh;
-  text-transform: uppercase;
+.app-container {
+  position: relative;
 
-  cursor: default;
+  display: flex;
+  flex-direction: column;
 
-  .icon-sun-inv {
-    display: inline-block;
+  height: 100%;
+}
 
-    animation: movesun 30s linear infinite;
+.error {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  padding: 1% 2%;
+
+  font-size: 1.3em;
+
+  background: red;
+  color: white;
+
+  z-index: 1000;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+
+  height: 10%;
+
+  .logo {
+    color: $asphalt;
+    font-size: 2em;
+    line-height: 2.1em;
+    text-transform: uppercase;
+
+    cursor: default;
+
+    .icon-sun-inv {
+      display: inline-block;
+      line-height: 0;
+
+      animation: movesun 30s linear infinite;
+    }
   }
 }
 
@@ -127,7 +161,8 @@ body {
   justify-content: space-between;
   align-items: stretch;
 
-  height: 85vh;
+  height: 90%;
+  flex-grow: 1;
 }
 
 .left-col {
@@ -151,19 +186,26 @@ body {
       top: 100%;
       left: 0;
 
-      display: none;
-
+      color: $asphalt;
       background: $orange;
       width: 100%;
+
       z-index: 1000;
 
       .help-item {
+        display: block;
+        width: 100%;
+
         padding: 1%;
+        border: none;
         border-bottom: 0.1em solid $asphalt;
 
+        text-align: left;
+        font-size: 1em;
+        font-family: inherit;
         color: $asphalt;
 
-        cursor: pointer;
+        background: transparent;
       }
     }
   }
@@ -225,6 +267,12 @@ body {
     cursor: pointer;
     transition: padding 0.5s;
 
+    opacity: 0.8;
+
+    &.active {
+      opacity: 1;
+    }
+
     &:first-child {
       margin-top: 0;
     }
@@ -238,11 +286,11 @@ body {
         margin-left: -0.3em;
       }
 
-      &.sun:after {
+      &.Clear:after {
         content: '\e806';
         @include weather-icon;
       }
-      &.cloud-sun:after {
+      &.Clouds:after {
         content: '\e807';
         @include weather-icon;
       }
@@ -250,11 +298,11 @@ body {
         content: '\e808';
         @include weather-icon;
       }
-      &.drizzle:after {
+      &.Drizzle:after {
         content: '\e809';
         @include weather-icon;
       }
-      &.rain:after {
+      &.Rain:after {
         content: '\e80a';
         @include weather-icon;
       }
@@ -290,21 +338,34 @@ body {
 
   width: 70%;
 
-  .content-wrapper {
+  .empty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: $asphalt;
+
+    box-sizing: border-box;
     height: 100%;
+
+    font-size: 2em;
+  }
+  .content-wrapper {
+    box-sizing: border-box;
+    flex-grow: 2;
+
+    height: 80%;
     padding: 4%;
     padding-top: 1%;
-    padding-right: 0;
     padding-bottom: 1%;
 
     background: $asphalt;
   }
 
   .city-header {
-
     position: relative;
 
-
+    height: 10%;
     background: $orange;
     color: $asphalt;
 
@@ -327,26 +388,19 @@ body {
     }
   }
 
-  .content {
-    position: relative;
-    background: $asphalt;
-
-    padding-right: 2%;
-    height: 100%;
-
-    overflow: hidden;
+  .row-content {
+    font-size: 1em;
   }
 
-  .scroll {
-    width: 2.5%;
+  .col-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+
+    font-size: 0.9em;
   }
 
-  .main-scrolling-content {
-    transition: transition 0.3s linear;
-  }
-
-  .weather-display-item {
-    margin-right: 3%;
+  .weather-display-item-row {
     margin-bottom: 3%;
     padding-bottom: 2%;
     border-bottom: 0.2em solid $orange;
@@ -358,8 +412,8 @@ body {
       margin-right: 1%;
       padding: 0 1%;
 
-      font-size: 1.4em;
-      line-height: 1.6em;
+      font-size: 1.2em;
+      line-height: 1.4em;
       font-weight: bold;
 
       background: $orange;
@@ -373,7 +427,33 @@ body {
 
       li {
         padding-bottom: 1%;
+
         width: 33%;
+      }
+    }
+  }
+
+  .weather-display-item-col {
+    height: 100%;
+    width: 21%;
+    margin-bottom: 3%;
+    border: 0.2em solid $orange;
+
+    .day-date {
+      margin-bottom: 1%;
+
+      font-size: 1.2em;
+      line-height: 1.4em;
+      font-weight: bold;
+
+      background: $orange;
+      color: $asphalt;
+    }
+
+    .weather-information {
+      li {
+        padding-left: 1%;
+        padding-bottom: 7%;
       }
     }
   }
