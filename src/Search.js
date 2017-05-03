@@ -64,7 +64,7 @@ class Search extends Component {
 
     if (!contains) {
       if (this.state.inputValue.toLowerCase() === this.state.selectedCity.name.toLowerCase()) {
-        this.props.fetchInformation(`http://api.openweathermap.org/data/2.5/forecast?id=${this.state.selectedCity.id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`);
+        this.props.fetchInformation(`https://api.openweathermap.org/data/2.5/forecast?id=${this.state.selectedCity.id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`);
       } else if (searchCities(this.state.inputValue).length === 0) {
         this.props.showError();
       } else {
@@ -72,7 +72,7 @@ class Search extends Component {
         if (cityId === undefined) {
           this.props.showError();
         } else {
-          this.props.fetchInformation(`http://api.openweathermap.org/data/2.5/forecast?id=${cityId.id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`);
+          this.props.fetchInformation(`https://api.openweathermap.org/data/2.5/forecast?id=${cityId.id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`);
         }
       }
       this.props.reset(-1);
@@ -140,7 +140,7 @@ export default connect(
     },
     openItem: (id, cityObj, number) => {
       dispatch((dispatcher) => {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
         .then((response) => {
           response.json().then((value) => {
             dispatcher({ type: 'SUCSESS_FETCH_INFORMATION', payload: value });

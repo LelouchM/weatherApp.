@@ -100,7 +100,7 @@ export default connect(
     },
     openItem: (id, cityObj, number) => {
       dispatch((dispatcher) => {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
         .then((response) => {
           response.json().then((value) => {
             dispatcher({ type: 'SUCSESS_FETCH_INFORMATION', payload: value });
@@ -117,7 +117,7 @@ export default connect(
     },
     reloadItem: (id, number) => {
       dispatch((dispatcher) => {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?id=${id}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
         .then((response) => {
           response.json().then((value) => {
             dispatcher({ type: 'CHANGE_FAVORITE_ITEM', payload: { num: number, value: Map(value) } });

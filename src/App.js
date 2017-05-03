@@ -73,7 +73,7 @@ export default connect(
     },
     showGeoWeather: (lat, lon) => {
       dispatch((dispatcher) => {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
         .then((response) => {
           response.json().then((value) => {
             dispatcher({ type: 'SUCSESS_FETCH_INFORMATION', payload: value });
@@ -86,7 +86,7 @@ export default connect(
     },
     getCityByName: (city, region) => {
       dispatch((dispatcher) => {
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${region}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${region}&APPID=59266b31367f58b75f5f9f7eb60f8a2f`)
         .then((response) => {
           response.json().then((value) => {
             dispatcher({ type: 'SUCSESS_FETCH_INFORMATION', payload: value });
