@@ -1,8 +1,6 @@
-import { List } from 'immutable';
+import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE, CHANGE_FAVORITE_ITEM, FETCH_FROM_STORAGE } from './ReducerTypes';
 
-import { ADD_TO_FAVORITE, REMOVE_FROM_FAVORITE, CHANGE_FAVORITE_ITEM } from './ReducerTypes';
-
-const init = List([]);
+const init = [];
 
 export default function (state = init, action) {
   let newState = state;
@@ -14,9 +12,15 @@ export default function (state = init, action) {
     case REMOVE_FROM_FAVORITE:
       newState = state.remove(action.payload);
       return newState;
+
     case CHANGE_FAVORITE_ITEM:
       newState = state.set(action.payload.num, action.payload.value);
       return newState;
+
+    case FETCH_FROM_STORAGE:
+      newState = action.payload;
+      return newState;
+
     default: {
       return newState;
     }

@@ -27,6 +27,16 @@ const Main = ({ cityInformation, addToFavorite, favoriteList }) => {
       )
     : (
       <div className="content-container">
+        <div className="map">
+          <input className="map-inp" id="map-inp" type="checkbox" />
+          <label className="map-btn" htmlFor="map-inp" onMouseDown={(e) => { e.preventDefault(); }}>
+            <span className="open-map">Open map</span>
+            <span className="close-map">Close map</span>
+          </label>
+          <div className="map-img">
+            <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${cityInformation.get('city').coord.lat},${cityInformation.get('city').coord.lon}&zoom=13&size=300x250&sensor=false`} alt="map" />
+          </div>
+        </div>
         <h1 className="city-header" onMouseDown={e => e.preventDefault()}>
           <span className="city-header-name">{cityInformation.get('city').name}:</span>
           <span className="add-to-favorite icon-plus-circle" onClick={add} />
@@ -47,7 +57,7 @@ const Main = ({ cityInformation, addToFavorite, favoriteList }) => {
 Main.propTypes = {
   cityInformation: PropTypes.object.isRequired,
   addToFavorite: PropTypes.func.isRequired,
-  favoriteList: PropTypes.object.isRequired,
+  favoriteList: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
 };
 
 export default connect(

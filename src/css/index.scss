@@ -248,7 +248,7 @@ body {
 
     .scrolling-content {
       padding-right: 7%;
-      transition: transition 0.3s linear;
+      transition: 0.5s linear;
     }
   }
 
@@ -267,10 +267,14 @@ body {
     cursor: pointer;
     transition: padding 0.5s;
 
-    opacity: 0.8;
-
     &.active {
-      opacity: 1;
+      background-color: $orange;
+      color: $asphalt;
+      border-color: $orange;
+
+      .delete-btn {
+        color: $asphalt;
+      }
     }
 
     &:first-child {
@@ -337,6 +341,58 @@ body {
   flex-direction: column;
 
   width: 70%;
+
+  .map {
+    position: absolute;
+    top:0;
+    right:0;
+
+    width: 300px;
+
+    background: $asphalt;
+    color: $orange;
+
+    z-index: 1000;
+    .map-btn {
+      display: block;
+
+      padding: 2% 0;
+
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .map-inp,
+    .close-map {
+      display: none;
+    }
+
+    .map-img {
+      height: 0;
+
+      transition: height 0.6s linear;
+      overflow: hidden;
+
+      .img {
+        height: 0;
+      }
+    }
+
+    .map-inp:checked + label .close-map {
+      display: inline;
+    }
+
+    .map-inp:checked + label .open-map {
+      display: none;
+    }
+
+    .map-inp:checked + label + .map-img {
+      height: 250px;
+      .img {
+        height: 250px;
+      }
+    }
+  }
 
   .empty-container {
     display: flex;
@@ -461,12 +517,12 @@ body {
 
 .scroll-bar {
   position: absolute;
-  right: 13%;
+  right: 0;
   top: 0;
   box-sizing: border-box;
 
   height:80px;
-  width: 75%;
+  width: 100%;
 
   background: $asphalt;
 
@@ -478,11 +534,24 @@ body {
   right: 2%;
   top: 0;
 
-  display: none;
   height:100%;
   width: 3%;
 
   background: $orange;
+}
+
+@media screen and (max-width: 2560px) and (min-width: 1460px) {
+  body {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  body {
+    font-size: 18px;
+    line-height: 20px;
+  }
 }
 
 @media screen and (max-width: 950px) {
@@ -511,6 +580,9 @@ body {
     font-size: 14px;
     line-height: 18px;
   }
+  #app {
+    width: 99%;
+  }
   .container {
     flex-direction: column;
     justify-content: flex-start;
@@ -526,7 +598,11 @@ body {
 
     padding: 5%;
     padding-right: 0;
-    margin-bottom: 3%
+    margin-bottom: 3%;
+
+    .favorite-item {
+      margin-top: 2%;
+    }
   }
 
   .content-container {
